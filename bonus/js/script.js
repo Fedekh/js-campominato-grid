@@ -25,10 +25,10 @@
 // DICHIARAZIONI
 // definisco in primis alcune variabili che mi serviranno con scope globale 
 const btn = document.querySelector(".btn"); // questo è il buttone che mi indicherà poi la difficoltà
-const grid = document.querySelector(".grid") // griglia le cui caselle dipenderanno dalal difficoltà selezionata
-const numberSquare = 100; //numero di caselle, di default 100, ma cambiando difficoltà cambieranno
-let gridGenerated = false;
-
+const grid = document.querySelector(".grid") // griglia le cui caselle dipenderanno dalal difficoltà selezionata 
+let gridGenerated = false; // mi dice se la grid è stata generata gia o meno
+let choise = document.getElementById("select"); // variabile legata al menu a tendina della difficolta
+console.log(choise.value);
 
 // #################################################################################################################
 // FUNZIONI
@@ -39,16 +39,35 @@ let gridGenerated = false;
  * @void
  */
 function generateGrid(numberOfSquares) {
-    const gridElem = []; //creo un array vuoto dove ci andranno numberSquare elements, in questo caso 100 currentElem
+    let currentElem ="";
+    let lastClass = choise.value;
+    console.log(lastClass);
+    grid.innerHTML = "";
     for (let k = 1; k <= numberOfSquares; k++) {
-        let currentElem = document.createElement("div"); //creo un elemento nel dom
-        currentElem.classList.add("grid-elem"); //aggiungo la classe stilizzata in css all'elemento appena creato
+        currentElem = document.createElement("div"); //creo un elemento nel dom
+        currentElem.classList.add("grid-elem", lastClass); //aggiungo la classe stilizzata in css all'elemento appena creato
         currentElem.innerText = k; // imposto il test (o numero) che dovrà poi comparire nella casella nel DOM
-        grid.appendChild(currentElem); //aggiungo l'elemento alla griglia
-        gridElem.push(currentElem);
+        grid.appendChild(currentElem); //aggiungo l'elemento alla griglia       
     }
-    return gridElem;
+     return currentElem;
 }
+
+
+// CREO funzione che in base alla scelta dell'utente mi cambia anche il numero degli elementi della grid
+function regulationGrid (modeUser) {
+    let numberSquare = 0;
+    if (modeUser === "easy"){
+        numberOfSquare = 100 ;
+
+    } else if (modeUser === "medium") {
+        numberOfSquare = 81 ;
+    }else if (modeUser === "hard"){
+        numberOfSquare = 49 ;
+    }
+
+    return numberOfSquare;
+}
+
 
 function itemClick() {
     console.log(this.innerText);    
@@ -57,25 +76,21 @@ function itemClick() {
 
 // #####################################################################################################################
 
-//EVENTO IN CUI LA FUNZIONE SOPRA DESCRITTA generateGrid AVVENGA SOLO SE CLICCO IL BTN, inoltre
+
+// EVENTO IN CUI LA FUNZIONE SOPRA DESCRITTA generateGrid AVVENGA SOLO SE CLICCO IL BTN, inoltre
 // la griglia deve essere creata una sola volta, e solo una volta creata posso aggiungere
 // eventlistner sul click di ogni singolo elemento della grid
 
 
 btn.addEventListener('click', function() {
-    if (!gridGenerated) {
-        let element = generateGrid(numberSquare); // in element metto il return della funzione generateGrid cioe gridElem
-        
-        // devo creare un sottociclo per fare addEventListener a ogni singolo elemento dell array
-        for (let i = 1 ; i < element.length ; i++){
-            element[i].addEventListener ("click", function(){
-                itemClick.call(element[i]);                
-            })            
-        }
-        gridGenerated = true;
-    }
+    const mode = choise.value; // modalita scelta dal menu a tendina
+    console.log(mode);
+    const numberOfSquare = regulationGrid(mode); //richiamo funzione per dare il numero di elementi della grid
+    console.log(numberOfSquare);
+    const lastNumberGrid = generateGrid(numberOfSquare); 
+    grid.append(lastNumberGrid);  
+    console.log(lastNumberGrid);     
 });
-
 
 
 
