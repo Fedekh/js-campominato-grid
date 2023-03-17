@@ -50,4 +50,6 @@ footer {
     align-items: center;
 }
 
-
+.click {
+    background-color: blue;
+}

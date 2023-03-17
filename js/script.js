@@ -3,7 +3,8 @@
 // L'utente clicca su un bottone che genererà una griglia di gioco quadrata.
 // Ogni cella ha un numero progressivo, da 1 a 100.
 // Ci saranno quindi 10 caselle per ognuna delle 10 righe.
-// Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed emetto un messaggio in console con il numero della cella cliccata.
+// Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro 
+// ed emette un messaggio in console con il numero della cella cliccata.
 
 // **Bonus**
 
@@ -28,6 +29,7 @@ const grid = document.querySelector(".grid") // griglia le cui caselle dipendera
 let numberSquare = 100; //numero di caselle, di default 100, ma cambiando difficoltà cambieranno
 let gridGenerated = true;
 
+// #################################################################################################################
 // FUNZIONI
 
 /**
@@ -46,12 +48,21 @@ function generateGrid(numberOfSquare) {
     return currentElem;
 }
 
+function itemClick(){
+    this.classList.add("click");
+    console.log(this.innerText);
+    
+}
 
-// EVENTO IN CUI LA FUNZIONE SOPRA DESCRITTA AVVENGA SOLO SE CLICCO IL BTN
+itemClick ();
+// EVENTO IN CUI LA FUNZIONE SOPRA DESCRITTA generateGrid AVVENGA SOLO SE CLICCO IL BTN
+// devo tornarci sopra per far si che non ne vengano creato a miliardi
 btn.addEventListener('click', function() {
     while (gridGenerated) {
       generateGrid(numberSquare);
       gridGenerated = false;
     }
   });
+
+
 
