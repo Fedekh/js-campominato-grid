@@ -26,38 +26,32 @@
 const btn = document.querySelector(".btn"); // questo è il buttone che mi indicherà poi la difficoltà
 const grid = document.querySelector(".grid") // griglia le cui caselle dipenderanno dalal difficoltà selezionata
 let numberSquare = 100; //numero di caselle, di default 100, ma cambiando difficoltà cambieranno
+let gridGenerated = true;
 
 // FUNZIONI
 
 /**
  * Description mi genera la griglia con gli elementi, dipendentemente dal numero di elementi in argomento
- * @param {text} numberOfGrid 
+ * @param {text} numberOfSquare che sarebbe numberSquare
  * @returns {array}
  */
-function generateGrid (numberOfGrid){
-    for (let k = 1 ; k <= numberOfGrid; k++){
+function generateGrid(numberOfSquare) {
+    for (let k = 1; k <= numberOfSquare; k++) {
         let currentElem = document.createElement("div"); //creo un elemento nel dom
         currentElem.classList.add("grid-elem"); //aggiungo la classe stilizzata in css all'elemento appena creato
         currentElem.innerText = k; // imposto il test (o numero) che dovrà poi comparire nella casella nel DOM
-        grid.appendChild(currentElem); //aggiungo l'elemento alal griglia
-        // console.log(currentElem, typeof currentElem);
+        grid.appendChild(currentElem); //aggiungo l'elemento alla griglia
+
     }
     return currentElem;
 }
 
-generateGrid(numberSquare);
 
-
-/**
- * Description mi genera 1 singolo elemento (square) della griglia
- * @param {any} 
- * @returns {any}
- */
-function generateGridElem () {
-    const square = document.createElement("div"); //mi crea un elemento con tag div
-    square.classList.add("grid-elem"); //aggiungo la classe grid-elem configurata con css
-    return square;
-
-}
-
+// EVENTO IN CUI LA FUNZIONE SOPRA DESCRITTA AVVENGA SOLO SE CLICCO IL BTN
+btn.addEventListener('click', function() {
+    while (gridGenerated) {
+      generateGrid(numberSquare);
+      gridGenerated = false;
+    }
+  });
 

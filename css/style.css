@@ -44,6 +44,7 @@ footer {
     width: calc(100% / 10);
     height:calc(100% / 10) ;
     border: 1px solid white;
+    color: rgb(144, 49, 131);
     display: flex;
     justify-content: center;
     align-items: center;
