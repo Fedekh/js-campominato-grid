@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(40, 36, 80);
+}
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+
+}
+
+header {
+    background-color: rgb(160, 169, 100);
+    border: 1px solid red;
+    height: 100px;
+}
+
+
+.container-grid {
+    height: calc(100% - 200px);
+    width: 800px;
+    margin: 0 auto;
+    background-color: rgb(107, 151, 189);
+}
+
+footer {
+    height: 100px;
+    border: 1px solid green;
+    background-color: rgb(33, 33, 33);
+}
+
+.grid {
+    width: 100%;
+    height: 100%;
+}
+
+.grid-elem {
+    width: calc(100% / 10);
+    height:calc(100% / 10) ;
+    border: 1px solid white;
+}
+
+
