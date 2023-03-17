@@ -27,14 +27,14 @@
 const btn = document.querySelector(".btn"); // questo è il buttone che mi indicherà poi la difficoltà
 const grid = document.querySelector(".grid") // griglia le cui caselle dipenderanno dalal difficoltà selezionata
 let numberSquare = 100; //numero di caselle, di default 100, ma cambiando difficoltà cambieranno
-let gridGenerated = true;
+
 
 // #################################################################################################################
 // FUNZIONI
 
 /**
  * Description mi genera la griglia con gli elementi, dipendentemente dal numero di elementi in argomento
- * @param {text} numberOfSquare che sarebbe numberSquare
+ * @param {numberSquare} numberOfSquare che sarebbe numberSquare
  * @returns {array}
  */
 function generateGrid(numberOfSquare) {
@@ -51,16 +51,21 @@ function generateGrid(numberOfSquare) {
 function itemClick(){
     this.classList.add("click");
     console.log(this.innerText);
+    console.log(this);
     
 }
 
 itemClick ();
+console.log(itemClick);
+
+
 // EVENTO IN CUI LA FUNZIONE SOPRA DESCRITTA generateGrid AVVENGA SOLO SE CLICCO IL BTN
 // devo tornarci sopra per far si che non ne vengano creato a miliardi
 btn.addEventListener('click', function() {
-    while (gridGenerated) {
-      generateGrid(numberSquare);
-      gridGenerated = false;
+    let gridGenerated = true;
+    if (gridGenerated) {
+      generateGrid(numberSquare);    
+
     }
   });
 
