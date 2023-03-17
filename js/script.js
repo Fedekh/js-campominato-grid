@@ -26,7 +26,8 @@
 // definisco in primis alcune variabili che mi serviranno con scope globale 
 const btn = document.querySelector(".btn"); // questo è il buttone che mi indicherà poi la difficoltà
 const grid = document.querySelector(".grid") // griglia le cui caselle dipenderanno dalal difficoltà selezionata
-let numberSquare = 100; //numero di caselle, di default 100, ma cambiando difficoltà cambieranno
+const numberSquare = 100; //numero di caselle, di default 100, ma cambiando difficoltà cambieranno
+let gridGenerated = false;
 
 
 // #################################################################################################################
@@ -35,39 +36,49 @@ let numberSquare = 100; //numero di caselle, di default 100, ma cambiando diffic
 /**
  * Description mi genera la griglia con gli elementi, dipendentemente dal numero di elementi in argomento
  * @param {numberSquare} numberOfSquare che sarebbe numberSquare
- * @returns {array}
+ * @void
  */
 function generateGrid(numberOfSquare) {
+    const gridElem = []; //creo un array vuoto dove ci andranno numberSquare elements, in questo caso 100 currentElem
     for (let k = 1; k <= numberOfSquare; k++) {
         let currentElem = document.createElement("div"); //creo un elemento nel dom
         currentElem.classList.add("grid-elem"); //aggiungo la classe stilizzata in css all'elemento appena creato
         currentElem.innerText = k; // imposto il test (o numero) che dovrà poi comparire nella casella nel DOM
         grid.appendChild(currentElem); //aggiungo l'elemento alla griglia
-
+        gridElem.push(currentElem);
     }
-    return currentElem;
+    return gridElem;
 }
 
-function itemClick(){
-    this.classList.add("click");
-    console.log(this.innerText);
-    console.log(this);
-    
+function itemClick() {
+    console.log(this.innerText);    
+    this.classList.add("click");    
 }
 
-itemClick ();
-console.log(itemClick);
+// #####################################################################################################################
+
+// EVENTO IN CUI LA FUNZIONE SOPRA DESCRITTA generateGrid AVVENGA SOLO SE CLICCO IL BTN, inoltre
+// la griglia deve essere creata una sola volta, e solo una volta creata posso aggiungere
+// eventlistner sul click di ogni singolo elemento della grid
 
 
-// EVENTO IN CUI LA FUNZIONE SOPRA DESCRITTA generateGrid AVVENGA SOLO SE CLICCO IL BTN
-// devo tornarci sopra per far si che non ne vengano creato a miliardi
 btn.addEventListener('click', function() {
-    let gridGenerated = true;
-    if (gridGenerated) {
-      generateGrid(numberSquare);    
-
+    if (!gridGenerated) {
+        let element = generateGrid(numberSquare); // in element metto il return della funzione generateGrid cioe gridElem
+        
+        // devo creare un sottociclo per fare addEventListener a ogni singolo elemento dell array
+        for (let i = 1 ; i < element.length ; i++){
+            element[i].addEventListener ("click", function(){
+                itemClick.call(element[i]);                
+            })            
+        }
+        gridGenerated = true;
     }
-  });
+});
+
+
+
+
 
 
 
