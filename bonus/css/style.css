@@ -67,6 +67,6 @@ select{
     width: calc(100% / 7);
 }
 
-.click {
+.click-blu {
     background-color: blue;
 }
