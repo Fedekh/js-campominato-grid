@@ -57,15 +57,15 @@ function generateGrid(numberOfSquares) {
 function regulationGrid (modeUser) {
     let numberSquare = 0;
     if (modeUser === "easy"){
-        numberOfSquare = 100 ;
+        numberSquare = 100 ;
 
     } else if (modeUser === "medium") {
-        numberOfSquare = 81 ;
+        numberSquare = 81 ;
     }else if (modeUser === "hard"){
-        numberOfSquare = 49 ;
+        numberSquare = 49 ;
     }
 
-    return numberOfSquare;
+    return numberSquare;
 }
 
 
