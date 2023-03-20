@@ -64,8 +64,7 @@ function itemClick() {
 
 btn.addEventListener('click', function() {
     if (!gridGenerated) {
-        let element = generateGrid(numberSquare); // in element metto il return della funzione generateGrid cioe gridElem
-        
+        let element = generateGrid(numberSquare); // in element metto il return della funzione generateGrid cioe gridElem        
         // devo creare un sottociclo per fare addEventListener a ogni singolo elemento dell array
         for (let i = 1 ; i < element.length ; i++){
             element[i].addEventListener ("click", function(){
